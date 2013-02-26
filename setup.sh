@@ -9,3 +9,4 @@ ln -s railsrc ~/.railsrc
 ln -s scripts ~/.scripts 
 ln -s tmux.conf ~/.tmux.conf 
 ln -s tmux.md ~/.tmux.md
+ln -s vim ~/.vim

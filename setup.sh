@@ -10,3 +10,6 @@ ln -s scripts ~/.scripts
 ln -s tmux.conf ~/.tmux.conf 
 ln -s tmux.md ~/.tmux.md
 ln -s vim ~/.vim
+ln -s gitconfig ~/.gitconfig
+ln -s githelpers ~/.githelpers
+ln -s my.ini ~/.my.ini

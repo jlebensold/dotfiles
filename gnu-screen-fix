@@ -1,0 +1,16 @@
+# -*- sh -*-
+
+# Fix GNU screen's 256-color terminal setttings
+if [ $STY ]; then
+    # we're running inside GNU screen...
+    if [ -n "$TERMCAP" ]; then
+        # ...where the $TERMCAP screen sets is wrong for 256-color terminals...
+        if (( `expr "$TERM" : '.*256col'` )); then
+            # ...so we blow it away, assuming either the system-wide
+            # termcap will have something better, or we have
+            # taken advantage of $TERMPATH and/or .termcap, or
+            # we'll be setting $TERMCAP ourselves after this
+            unset TERMCAP
+        fi
+    fi
+fi

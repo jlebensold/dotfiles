@@ -1,0 +1,123 @@
+# -*- sh -*-
+
+# # Add some user and/or local paths to $PATH and $MANPATH
+
+# ###
+# ### Add your dirs to [pre|post]PATH and [pre|post]MANPATH below.
+# ###   Dirs already in your PATH/MANPATH won't be added.
+# ###   Dirs that don't exist on your system won't be added.
+# ###   Dirs will be *prepended* to your PATH/MANPATH, order preserved.
+# ###
+
+prePATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin"
+
+postPATH=""
+
+preMANPATH="/usr/local/mysql/man:/usr/local/git/man:/usr/local/man:/opt/local/man"
+
+postMANPATH="$HOME/man:$HOME/.rvm/man"
+
+# # Note on $MANPATH, $extraMANPATH
+# # we don't want to set $MANPATH if the system/user is using another
+# #   mechanism to find man pages (e.g. manpath(1) on ubuntu or freebsd),
+# #   because setting MANPATH could clobber that mechanism.
+# # manpath(1) will use $PATH to find man pages; for the most
+# #   part, if you add something to [pre|post]PATH, then manpath(1) will
+# #   pick up your corresponding man pages.
+
+
+# ##
+# ## Function definitions
+# ##
+
+list_contains () {
+    eval p=\$$1
+    for dir in $p
+    do
+        if [ "$dir" == "$2" ]; then
+           return 0
+        fi
+    done
+    return 1
+}
+
+prepend_to_listvar () {
+    if [ -d $2 ] && ! ( list_contains "$1" "$2" ) ; then
+        eval "$1=$2${IFS:0:1}\$$1"
+    fi
+}
+
+append_to_listvar () {
+    if [ -d $2 ] && ! ( list_contains "$1" "$2" ) ; then
+        eval "$1=\$$1${IFS:0:1}$2"
+    fi
+}
+
+reverse_list () {
+    rev=$1
+    shift
+    while [ $1 ]
+    do
+        rev=$1${IFS:0:1}$rev
+        shift
+    done
+    echo -n "$rev"
+}
+
+move_to_front () {
+    eval p=\$$1
+    r=$2
+    for dir in $p
+    do
+	if [ "$dir" != "$2" ] && [ "$dir/" != "$2" ] ; then
+	    append_to_listvar r "$dir"
+	fi
+    done
+    eval "$1=$r"
+}
+
+# ##
+# ## End function definitions
+# ##
+
+# # we're going to work with paths separated by ":" instead of whitespace
+IFS=:
+
+# fix Apple's default PATH, which puts /usr/local/bin after /usr/bin,
+#  which breaks Homebrew-installed stuff
+
+if (list_contains PATH "/usr/local/bin") || (list_contains PATH "/usr/local/bin/") ; then
+    move_to_front PATH "/usr/local/bin"
+fi
+
+for dir in $( reverse_list $prePATH )
+do
+    if [[ -d $dir ]] || [[ -h $dir ]] ; then
+	prepend_to_listvar PATH "$dir"
+    fi
+done
+
+for dir in $postPATH
+do
+    if ( [ -d $dir ] || [ -h $dir ] ) ; then
+	append_to_listvar PATH "$dir"
+    fi
+done
+
+if [ -n "$MANPATH" ]; then
+    for dir in $( reverse_list $preMANPATH )
+    do
+        if ( [ -d $dir ] || [ -h $dir ] ) ; then
+            prepend_to_listvar MANPATH "$dir"
+	fi
+    done
+    for dir in $postMANPATH
+    do
+        if ( [ -d $dir ] || [ -h $dir ] ) ; then
+            append_to_listvar MANPATH "$dir"
+	fi
+    done
+fi
+
+# # put IFS back
+unset IFS

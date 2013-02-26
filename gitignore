@@ -1,0 +1,13 @@
+# Mostly from https://github.com/github/gitignore
+
+############################## OS X ##############################
+
+.DS_Store?
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes

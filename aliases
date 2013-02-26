@@ -1,0 +1,45 @@
+# -*- sh -*-
+
+# Changing directory to code project
+function p  { cd ~/Projects/$1; }
+function db { cd ~/Dropbox/$1; }
+function j  { cd ~/Junk/$1; }
+function bcd { cd `bundle show $1`; }
+# Misc
+alias reload='. ~/.bash_profile'
+alias fack="find . | grep -v '~' | ack -i $*"
+if ls --color -d . >/dev/null 2>&1; then
+    #GNU ls
+    alias ls="ls --color=auto"
+elif ls -G -d . >/dev/null 2>&1; then
+    #BSD ls
+    declare -x CLICOLOR=1
+fi
+alias ll="ls -l"
+alias la='ls -A'
+alias l='ls -CF'
+alias e="emacs"
+alias tdb="cd ~/Dropbox/Dickson\\ Labs/treesdb"
+alias m="mate"
+alias r3="rvm use 1.9.2-head@rails3"
+alias rr="rake routes | less -S"
+alias rdm="rake db:migrate"
+alias hol="cd ~/Projects/hol/"
+alias holr="cd ~/Projects/hol-rails/"
+alias ackphp="ack --ignore-dir=tests --php"
+alias dush="du -sh ."
+
+alias g='git'
+alias gs='git status'
+alias gc='git commit'
+alias gca='git commit -a'
+alias ga='git add'
+alias gco='git checkout'
+alias gb='git branch'
+alias gm='git merge'
+alias gd='git diff'
+alias gl='git log'
+
+alias ber='bundle exec rspec'
+alias be='bundle exec'
+alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"

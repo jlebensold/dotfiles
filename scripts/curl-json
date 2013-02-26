@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $# == 2 && $1 -eq "GET" ]]
+then
+    curl -H "Accept: application/json" -H "Content-type: application/json" -X $*
+elif [[ $# == 3 && $1 -eq "POST" ]]
+then
+    curl -H "Accept: application/json" -H "Content-type: application/json" -X $1 $2 -d $3
+else
+    echo "Usage: "
+    echo "  `basename $0` GET url"
+    echo "  `basename $0` POST url json"
+fi
+
+echo

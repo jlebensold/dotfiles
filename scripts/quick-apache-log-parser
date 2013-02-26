@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# -*- ruby -*-
+
+require 'rubygems'
+require 'apachelogregex'
+
+
+format = "%{%Y-%m-%d}t\t%{%H:%M:%S}t\t%a\t%m\t%>s\t%B\t%U\t%q\t%{Referer}i\t%{User-Agent}i\t%{Cookie}i\t%T"
+
+parser = ApacheLogRegex.new(format)
+
+
+STDIN.each do |line|
+
+
+  p = parser.parse!(line)
+
+  puts p.class
+
+end

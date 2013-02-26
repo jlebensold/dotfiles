@@ -1,0 +1,3 @@
+#!/bin/sh
+
+osascript -e 'tell application "iTunes"' -e "$1" -e "end tell"

@@ -1,0 +1,149 @@
+#!/usr/bin/ruby
+# -*- ruby -*-
+
+begin
+  require 'hirb'
+  Hirb.enable
+
+  def hirbv
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => true}}}
+  end
+
+  def hirbh
+    Hirb.disable
+    Hirb.enable :output => {"ActiveRecord::Base" => {:class => :auto_table, :options => {:vertical => false}}}
+  end
+rescue LoadError
+end
+
+begin
+  require ENV['HOME'] + '/.localrailsrc.rb'
+rescue LoadError
+end
+
+def change_log(stream)
+  Rails.logger = Logger.new(stream)
+  ActiveRecord::Base.logger = Logger.new(stream)
+  ActiveRecord::Base.clear_active_connections!
+  ActionController::Base.logger = Logger.new STDOUT
+end
+
+def show_log
+  change_log(STDOUT)
+  nil
+end
+
+def hide_log
+  change_log(nil)
+  nil
+end
+
+# def how_to_load_a_rake_task
+#   require 'rake'
+#   Rails.application.load_tasks
+#   Rake::Task['routes'].invoke
+#   Rake::Task['routes'].reenable
+# end
+
+def show_routes(string = nil)
+  if Rails.version =~ /^3.2/
+    show_routes_thee_two(string)
+  else
+    show_routes_legacy(string)
+  end
+end
+
+def show_routes_thee_two(match = nil)
+  Rails.application.reload_routes!
+  all_routes = Rails.application.routes.routes
+
+  require 'rails/application/route_inspector'
+  inspector = Rails::Application::RouteInspector.new
+
+  routes = inspector.format(all_routes, ENV['CONTROLLER'])
+
+  ansi_bold       = "\033[1m"
+  ansi_reset      = "\033[0m"
+
+  if (match)
+    match = match.to_s
+    puts routes.grep(/#{match}/).map { |r|
+      r.gsub!(match, "#{ansi_bold}#{match}#{ansi_reset}")
+    }.join("\n")
+
+  else
+    puts routes.join "\n"
+  end
+end
+
+def show_routes_legacy(string = nil)
+
+  string = string.to_s
+
+  # lifted from gems/railties-3.0.3/lib/rails/tasks/routes.rake
+
+  Rails.application.reload_routes!
+  all_routes = Rails.application.routes.routes
+
+  if ENV['CONTROLLER']
+    all_routes = all_routes.select{ |route| route.defaults[:controller] == ENV['CONTROLLER'] }
+  end
+
+  routes = all_routes.collect do |route|
+
+    reqs = route.requirements.dup
+    reqs[:to] = route.app unless route.app.class.name.to_s =~ /^ActionDispatch::Routing/
+    reqs = if reqs.empty?
+             ""
+           elsif reqs[:controller]
+             reqs[:controller] + '#' + reqs[:action]
+           else
+             reqs.inspect
+           end
+
+    {:name => route.name.to_s, :verb => route.verb.to_s, :path => route.path, :reqs => reqs}
+  end
+
+  routes.reject! { |r| r[:path] =~ %r{/rails/info/properties} } # Skip the route if it's internal info route
+
+  name_width = routes.map{ |r| r[:name].length }.max
+  verb_width = routes.map{ |r| r[:verb].length }.max
+  path_width = routes.map{ |r| r[:path].length }.max
+
+  ansi_bold       = "\033[1m"
+  ansi_reset      = "\033[0m"
+  ansi_lgray    = "\033[0;37m"
+  ansi_gray     = "\033[1;30m"
+
+  routes.each do |r|
+    if string.nil? or r[:path].index(string) or r[:name].index(string) or r[:reqs].index(string)
+      line = [
+              r[:name].rjust(name_width),
+              r[:verb].ljust(verb_width),
+              r[:path].ljust(path_width),
+              r[:reqs]
+             ].join(' ')
+
+      unless string.nil?
+        line.gsub!(string, "#{ansi_bold}#{string}#{ansi_reset}")
+      end
+
+      puts line
+    end
+  end
+  nil
+end
+
+
+module ActiveRecord
+  class Relation
+    def to_sql_formatted
+      to_sql.gsub(/([A-Z][A-Z\s]+)/) { |m| "\n#{m}" }
+    end
+
+    def most(field, having=0)
+      group(field).select("count(#{field}) AS total").having("total >= #{having}").order("total DESC")
+    end
+  end
+end

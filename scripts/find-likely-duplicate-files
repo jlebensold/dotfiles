@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+Dir['**/*'].select do |f|
+  File.file? f
+end.reduce({}) do |h,e|
+  name = File.basename e
+  h[name] ||= []
+  h[name] << e
+  h
+end.select do |k,v|
+  v.length > 1
+end.each_pair do |e|
+  puts e
+  puts
+end

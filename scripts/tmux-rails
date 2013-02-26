@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# Usage:
+#   tmux-rails
+#   tmux-rails directory-with-project-in-it
+
+if [ $# -eq 1 ]
+then
+    if [ -d $1 ]
+    then
+	cd $1
+    else
+	echo "directory $1 not found"
+	exit 1
+    fi
+fi
+
+PROJECT=`basename $PWD`
+
+#FUN FACT:
+
+# in the -t option available with most tmux commands, the '.' character has special meaning, indicating a
+# pane withing a window.  So if you've got a project in a directory named "foo-v4.8", and you use that as
+# your session name as well, and then you do 'tmux some-command -t foo-v4.8', then tmux will try
+# to target pane 8 of window 0 in session "foo-v4".  Which is not what you want at all, as that session
+# doesn't even exist, let alone the pane.
+#
+# To get around this, one can use the fact that tmux will try to match your session name using fnmatch(3),
+# (aka filename pattern matching or globbing).  So you can replace every '.' in your session name with '?',
+# and give that to the -t option instead of your actual session name (perversely, tmux will happily create
+# session names containing '.' for you, then gives you no way to reference them directly).
+
+PMATCH=`echo "$PROJECT" | tr \. \?`
+
+# tmux barfs on session names with '.' in them.  Inconvenient if your project name has a version number in it.
+#PROJECT=`echo -n "$PROJECT" | tr \. _`
+
+PORT=`ruby -e 'puts (ARGV[0][0].upcase.ord - 65) + (ARGV[0][-1].upcase.ord - 65) * 100 + 3000' $PROJECT`
+
+tmux start-server
+
+if tmux has-session -t $PROJECT 2>/dev/null
+then
+    tmux attach -t $PROJECT
+else
+    bundle
+
+    # the trailing colon after $PMATCH is the character that separates the
+    # session name from the window name.  Leaving the window name empty
+    # means, for new-window, "use the next available window number".  for
+    # send-keys, it means "use the current window."  If the colon is missing
+    # for send-keys, it will first try to interpret the session name as a
+    # window identifier.  Which we don't want.
+
+    tmux new-session -s "$PROJECT" -d -n server
+    tmux send-keys   -t "$PMATCH:" "rails s -p $PORT" C-m
+
+#    tmux new-window  -t "$PMATCH:" -n emacs
+#    tmux send-keys   -t "$PMATCH:" "TERM=xterm-256color emacs" C-m
+
+    tmux new-window  -t "$PMATCH:" -n shell
+
+    tmux new-window  -t "$PMATCH:" -n console
+    tmux send-keys   -t "$PMATCH:" "cd .; bundle exec rails c" C-m
+
+    tmux new-window  -t "$PMATCH:" -n db
+    tmux send-keys   -t "$PMATCH:" "cd .; bundle exec rails db" C-m
+
+    # only open a guard window if the project has a Guardfile.
+    if [ -f $PWD/Guardfile ]; then
+	tmux new-window  -t "$PMATCH:" -n guard
+	tmux send-keys   -t "$PMATCH:" "cd .; bundle exec guard" C-m
+    fi
+
+    # if you reorder the windows, make sure this guy is set to the number you want.
+    tmux select-window  -t "$PMATCH:2"
+
+    tmux attach-session -t "$PMATCH"
+fi
+
+

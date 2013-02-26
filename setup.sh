@@ -14,3 +14,4 @@ ln -s  $DIR/vim ~/.vim
 ln -s  $DIR/gitconfig ~/.gitconfig
 ln -s  $DIR/githelpers ~/.githelpers
 ln -s  $DIR/my.ini ~/.my.ini
+ln -s  $DIR/bash_profile ~/.bash_profile

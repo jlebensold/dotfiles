@@ -1,4 +1,4 @@
-syntax enable filetype plugin indent on
+
 let mapleader = ","
 
 
@@ -63,7 +63,8 @@ set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
 autocmd User Rails let b:surround_{char2nr('-')} = "<% \r %>" " displays <% %> correctly
-:set cpoptions+=$ " puts a $ marker for the end of words/lines in cw/c$ commands
+
+"set cpoptions+=$ " puts a $ marker for the end of words/lines in cw/c$ commands
 
 """"""""""" Kevin's hacks """"""""
 " highlight current line 
@@ -96,7 +97,7 @@ set winwidth=79
 """""
 function! RenameFile()
     let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
+    let new_name = input('New file name: ', expand('%'), 'file') 
     if new_name != '' && new_name != old_name
         exec ':saveas ' . new_name
         exec ':silent !rm ' . old_name
@@ -104,6 +105,10 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
+
+""""
+" Moving around
+""""
 
 """""
 " Misc key maps

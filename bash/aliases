@@ -45,6 +45,6 @@ alias be='bundle exec'
 alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
 
 alias vu='vagrant up'
-alias vs='vagrant status'
+alias vs='vagrant ssh'
 alias vp='vagrant provision'
 alias vd='vagrant destroy'

@@ -26,7 +26,7 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-PATH=$PATH:/Users/ian/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:/Users/jon/.rvm/bin # Add RVM to PATH for scripting
 
 export RUBY_HEAP_MIN_SLOTS=1000000
 export RUBY_HEAP_FREE_MIN=500000

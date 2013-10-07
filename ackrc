@@ -14,4 +14,4 @@
 --color
 --follow
 --group
-
+--type-add=js=.coffee

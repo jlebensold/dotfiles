@@ -8,7 +8,7 @@
   ui = auto
 [core]
 	excludesfile = /Users/jon/.gitignore
-	autocrlf = input
+	quotepath = false
 [apply]
 	whitespace = nowarn
 [format]

@@ -54,11 +54,12 @@ filetype plugin on    " Enable filetype-specific plugin
  
 filetype plugin indent on
 
-let g:ctrlp_max_depth = 10
+let g:ctrlp_max_depth = 15
 let g:ctrlp_max_files = 100000
+let g:ctrlp_working_path_mode = 'w'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*
 
 set guifont=Monaco:h12
-let g:NERDTreeWinPos = "right"
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
 set go-=L " Removes left hand scroll bar
@@ -88,8 +89,8 @@ call MapCR()
 " Fancy Windows
 """""
 au VimEnter * set winheight=999
-set winheight=6                                                                                                                                                                                             
-set winminheight=5
+set winheight=50
+"set winminheight=20
 set winwidth=79
 
 """""
@@ -119,6 +120,11 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" Oh Britania!
+map! ± ~
+map! § `
+
+
 """""                                                                                                                                                                                                       
 " File types
 """""
@@ -132,3 +138,6 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab tabstop=2 softtab
 " Ruby
 """""
 au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab tabstop=2 softtabstop=2
+
+
+call pathogen#runtime_append_all_bundles()

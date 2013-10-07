@@ -43,3 +43,8 @@ alias gl='git log'
 alias ber='bundle exec rspec'
 alias be='bundle exec'
 alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
+
+alias vu='vagrant up'
+alias vs='vagrant status'
+alias vp='vagrant provision'
+alias vd='vagrant destroy'

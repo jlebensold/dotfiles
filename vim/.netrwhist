@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/jon/Projects/sympo/ach-excel'
 let g:netrw_dirhist_2='/Users/jon/Projects/informary/2013-flickr-popularity'
 let g:netrw_dirhist_3='/Users/jon/Projects/n49/stats/stats.n49.ca/stats2'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/jon/Projects/caldav/ruby-caldav-master'
 let g:netrw_dirhist_5='/Users/jon/Projects/python-caldav/CalDAVClientLibrary'
 let g:netrw_dirhist_6='/Users/jon/Projects/oss/TaskMaster/oss_taskmanager/trunk'
 let g:netrw_dirhist_7='/Users/jon/.vim'
+let g:netrw_dirhist_8='/private/tmp/foobar/dist/WEB-INF/classes'

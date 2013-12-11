@@ -4,7 +4,7 @@ let mapleader = ","
 
 if has("gui_mac") || has("gui_macvim")
   macmenu &File.New\ Tab     key=<Nop>
-  nmap <leader>ff :FufFile **/<CR> 
+  nmap <leader>ff :FufFile **/<CR>
 endif
 
 set nowrap        " don't wrap lines
@@ -46,12 +46,12 @@ call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
 syntax on
- 
+
 filetype off
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugin
- 
+
 filetype plugin indent on
 
 let g:ctrlp_max_depth = 15
@@ -67,8 +67,10 @@ autocmd User Rails let b:surround_{char2nr('-')} = "<% \r %>" " displays <% %> c
 
 "set cpoptions+=$ " puts a $ marker for the end of words/lines in cw/c$ commands
 
+""" evil whitespace detection
+nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:w<CR>
 """"""""""" Kevin's hacks """"""""
-" highlight current line 
+" highlight current line
 set cursorline
 """""
 " Colors
@@ -76,14 +78,14 @@ set cursorline
 set background=dark
 colorscheme solarized
 """""
-" STATUS LINE                                                                                                                                                                                               
+" STATUS LINE
 """""
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 " Clear the search buffer when hitting return
 function! MapCR()
   nnoremap <cr> :nohlsearch<cr>
 endfunction
-call MapCR() 
+call MapCR()
 
 """""
 " Fancy Windows
@@ -98,7 +100,7 @@ set winwidth=79
 """""
 function! RenameFile()
     let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file') 
+    let new_name = input('New file name: ', expand('%'), 'file')
     if new_name != '' && new_name != old_name
         exec ':saveas ' . new_name
         exec ':silent !rm ' . old_name
@@ -114,7 +116,7 @@ map <leader>n :call RenameFile()<cr>
 """""
 " Misc key maps
 """""
-" Move around splits with <c-hjkl>                                                                                                                                                                          
+" Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
@@ -125,12 +127,12 @@ map! ± ~
 map! § `
 
 
-"""""                                                                                                                                                                                                       
+"""""
 " File types
 """""
 au BufRead,BufNewFile *.ejs   setfiletype html
 
-"""""                                                                                                                                                                                                       
+"""""
 " CoffeeScript
 """""
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab tabstop=2 softtabstop=2

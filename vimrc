@@ -57,7 +57,7 @@ filetype plugin indent on
 let g:ctrlp_max_depth = 15
 let g:ctrlp_max_files = 100000
 let g:ctrlp_working_path_mode = 'w'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/vendor/bundle,*/vendor/bower*,*/node_modules,*/coverage/*
 
 set guifont=Monaco:h12
 set guioptions-=T " Removes top toolbar
@@ -140,6 +140,8 @@ au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab tabstop=2 softtab
 " Ruby
 """""
 au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab tabstop=2 softtabstop=2
+
+au BufReadPost *.jsx.erb set syntax=javascript
 
 
 call pathogen#runtime_append_all_bundles()

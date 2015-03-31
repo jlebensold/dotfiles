@@ -4,6 +4,7 @@
 # NOT read by subshells (like what screen creates).
 
 source $HOME/.bash/better-paths
+source ~/.git-prompt.sh
 
 # .bashrc is read by subshells. This will make login shells read it too.
 if [ -f $HOME/.bashrc ]; then
@@ -11,10 +12,10 @@ if [ -f $HOME/.bashrc ]; then
 fi
 
 #KevinHacks
-. ~/bin/bash_colors.sh  
+. ~/bin/bash_colors.sh
+
 # Unbreak broken, non-colored terminal
-export TERM='xterm-color'
-alias ls='ls -G'                                                                                                                                                                                            
+alias ls='ls -G'
 alias ll='ls -lG'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
@@ -35,7 +36,7 @@ function minutes_since_last_commit {
     echo $minutes_since_last_commit
 }
 grb_git_prompt() {
-    local g="$(__gitdir)"
+    local g=`__git_ps1`
     if [ -n "$g" ]; then
         local MINUTES_SINCE_LAST_COMMIT=`minutes_since_last_commit`
         if [ "$MINUTES_SINCE_LAST_COMMIT" -gt 30 ]; then
@@ -44,14 +45,14 @@ grb_git_prompt() {
             local COLOR=${YELLOW}
         else
             local COLOR=${GREEN}
-        fi  
-        local SINCE_LAST_COMMIT="${COLOR}$(minutes_since_last_commit)m${NORMAL}"
+        fi
+        local SINCE_LAST_COMMIT="$(minutes_since_last_commit)m"
         # The __git_ps1 function inserts the current git branch where %s is
-        local GIT_PROMPT=`__git_ps1 "(${SINCE_LAST_COMMIT}|${YELLOW}%s${NORMAL})"`
+        local GIT_PROMPT=`__git_ps1 "(${SINCE_LAST_COMMIT}|%s)"`
         echo ${GIT_PROMPT}
-    fi  
+    fi
 }
 
-PS1="${CYAN}\h${NORMAL}:\W\$(grb_git_prompt) \u\$ " 
+#PS1="${CYAN}\h${NORMAL}:\W\$(grb_git_prompt) \u\$ "
+PS1="\h:\W\$(grb_git_prompt) \u\$ "
 
-source ~/bin/git-completion.bash

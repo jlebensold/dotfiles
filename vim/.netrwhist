@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/jon/Projects/edesio/config/initializers/angular-rails.rb'
 let g:netrw_dirhist_2='/Users/jon/Projects/inactive/oss/huddle'
 let g:netrw_dirhist_3='/Users/jon/Projects/trail-app/app/assets/stylesheets/_day_done.scss'
 let g:netrw_dirhist_4='/Users/jon/dotfiles/vim'
+let g:netrw_dirhist_5='/Users/jon'
+let g:netrw_dirhist_6='/Users/jon/Projects/trail-app/.git/hooks'
+let g:netrw_dirhist_7='/Users/jon/Projects/trail-app/app/models/concerns/task_construction.rb'

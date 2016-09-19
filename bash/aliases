@@ -2,13 +2,6 @@
 
 # Changing directory to code project
 function p   { cd ~/Projects/$1; }
-function poh { cd ~/Projects/oss/huddle;}
-function pod { cd ~/Projects/IABRI/dev/drum;}
-function pob { cd ~/Projects/bahaifr/vagrantpress-master;}
-
-function db { cd ~/Dropbox/$1; }
-function j  { cd ~/Junk/$1; }
-function bcd { cd `bundle show $1`; }
 # Misc
 alias reload='. ~/.bash_profile'
 alias fack="find . | grep -v '~' | ack -i $*"
@@ -22,15 +15,8 @@ fi
 alias ll="ls -l"
 alias la='ls -A'
 alias l='ls -CF'
-alias e="emacs"
-alias tdb="cd ~/Dropbox/Dickson\\ Labs/treesdb"
-alias m="mate"
-alias r3="rvm use 1.9.2-head@rails3"
 alias rr="rake routes | less -S"
 alias rdm="rake db:migrate"
-alias hol="cd ~/Projects/hol/"
-alias holr="cd ~/Projects/hol-rails/"
-alias ackphp="ack --ignore-dir=tests --php"
 alias dush="du -sh ."
 
 alias g='git'
@@ -44,13 +30,17 @@ alias gm='git merge'
 alias gd='git diff'
 alias gl='git log'
 
+alias pt='cd ~/Projects/trail-app'
+
 alias ber='bundle exec rspec'
 alias be='bundle exec'
-alias vx="open ~/Projects/dotfiles/applescript/MaximizeTerminalHeight.app"
 
 alias vu='vagrant up'
 alias vs='vagrant ssh'
 alias vp='vagrant provision'
 alias vd='vagrant destroy'
+
+alias rubox='rubocop -a'
+alias rubo='rubocop'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'

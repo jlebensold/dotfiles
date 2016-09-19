@@ -57,7 +57,7 @@ filetype plugin indent on
 let g:ctrlp_max_depth = 15
 let g:ctrlp_max_files = 100000
 let g:ctrlp_working_path_mode = 'w'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/vendor/bundle,*/vendor/bower*,*/node_modules,*/coverage/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/vendor/bundle,*/vendor/bower*,*/node_modules,*/coverage/*,*/build/*
 
 set guifont=Monaco:h12
 set guioptions-=T " Removes top toolbar
@@ -136,6 +136,12 @@ au BufRead,BufNewFile *.ejs   setfiletype html
 " CoffeeScript
 """""
 au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab tabstop=2 softtabstop=2
+
+""""
+" ES6
+"""
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+
 """""
 " Ruby
 """""

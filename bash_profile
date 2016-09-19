@@ -4,7 +4,7 @@
 # NOT read by subshells (like what screen creates).
 
 source $HOME/.bash/better-paths
-source ~/.git-prompt.sh
+# source ~/.git-prompt.sh
 
 # .bashrc is read by subshells. This will make login shells read it too.
 if [ -f $HOME/.bashrc ]; then
@@ -12,7 +12,7 @@ if [ -f $HOME/.bashrc ]; then
 fi
 
 #KevinHacks
-. ~/bin/bash_colors.sh
+# . ~/Projects/dotfiles/bash_colors.sh
 
 # Unbreak broken, non-colored terminal
 alias ls='ls -G'
@@ -55,4 +55,3 @@ grb_git_prompt() {
 
 #PS1="${CYAN}\h${NORMAL}:\W\$(grb_git_prompt) \u\$ "
 PS1="\h:\W\$(grb_git_prompt) \u\$ "
-

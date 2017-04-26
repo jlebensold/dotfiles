@@ -9,7 +9,7 @@
 # ###   Dirs will be *prepended* to your PATH/MANPATH, order preserved.
 # ###
 
-prePATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin"
+prePATH="$HOME/bin:$HOME/.scripts:$HOME/.rvm/bin:/usr/local/mysql/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin"
 
 postPATH=""
 

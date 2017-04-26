@@ -35,10 +35,10 @@ export RUBY_GC_MALLOC_LIMIT=100000000
 export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 
 
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  GIT_PROMPT_THEME=Default
-  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
-fi
+#if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+#  GIT_PROMPT_THEME=Default
+#  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+#fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=$PATH:/usr/local/include:/usr/local/lib:/usr/local/bin

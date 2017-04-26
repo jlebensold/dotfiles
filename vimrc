@@ -37,13 +37,15 @@ set noerrorbells         " don't beep
 
 set nobackup
 set noswapfile
+set textwidth=80
+set colorcolumn=100
 
 
 
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
 call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 
 syntax on
 
@@ -149,5 +151,17 @@ au BufNewFile,BufReadPost *.rb setl shiftwidth=2 expandtab tabstop=2 softtabstop
 
 au BufReadPost *.jsx.erb set syntax=javascript
 
+""""
+" Syntastic
+""""
+"set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-call pathogen#runtime_append_all_bundles()
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_ruby_checkers = ['rubocop']
+"
+call pathogen#infect()

@@ -5,21 +5,32 @@ let mapleader = ","
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-
+"
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
+Plug 'vim-latex/vim-latex'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'micha/vim-colors-solarized'
-Plug 'tpope/vim-sensible'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" Plug 'tpope/vim-sensible'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
+
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips/' , 'Ultisnips']
+let g:tex_flavor = 'latex'
+
 
 set nowrap        " don't wrap lines
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -77,7 +88,12 @@ set go-=L " Removes left hand scroll bar
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
+
 nnoremap <c-l> <c-w>l
+
+
+""" rename """
+""" nnoremap <leader>r :saveas<space>
 
 """ evil whitespace detection
 nnoremap W :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>:w<CR>
@@ -100,4 +116,5 @@ colorscheme solarized
 if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers = {}
 endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+"let g:ycm_semantic_triggers['typescript'] = ['.']
+

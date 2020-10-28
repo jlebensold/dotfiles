@@ -1,5 +1,11 @@
 
 let mapleader = ","
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/bundle')
 
 
 if has("gui_mac") || has("gui_macvim")
@@ -167,4 +173,5 @@ au BufReadPost *.jsx.erb set syntax=javascript
 call pathogen#infect()
 
 """"""""""
-
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'

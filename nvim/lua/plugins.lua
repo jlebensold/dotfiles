@@ -42,15 +42,15 @@ require("lazy").setup({
       { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Grep string under cursor" },
     },
     config = function()
-      -- Shim for deprecated ft_to_lang (fixes telescope/treesitter compatibility)
-      local ts_ok, ts_parsers = pcall(require, "nvim-treesitter.parsers")
-      if ts_ok and ts_parsers and not ts_parsers.ft_to_lang then
-        ts_parsers.ft_to_lang = vim.treesitter.language.get_lang
-      end
-
       local telescope = require("telescope")
+      local previewers = require("telescope.previewers")
+
       telescope.setup({
         defaults = {
+          -- Use vim syntax highlighting instead of treesitter in previews
+          file_previewer = previewers.vim_buffer_cat.new,
+          grep_previewer = previewers.vim_buffer_vimgrep.new,
+          qflist_previewer = previewers.vim_buffer_qflist.new,
           file_ignore_patterns = {
             "node_modules", "%.git/", "vendor/bundle", "coverage",
             "build", "tmp", "log", "%.swp", "%.bak",

@@ -42,6 +42,12 @@ require("lazy").setup({
       { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Grep string under cursor" },
     },
     config = function()
+      -- Shim for deprecated ft_to_lang (fixes telescope/treesitter compatibility)
+      local ts_ok, ts_parsers = pcall(require, "nvim-treesitter.parsers")
+      if ts_ok and ts_parsers and not ts_parsers.ft_to_lang then
+        ts_parsers.ft_to_lang = vim.treesitter.language.get_lang
+      end
+
       local telescope = require("telescope")
       telescope.setup({
         defaults = {

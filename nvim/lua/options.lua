@@ -57,3 +57,7 @@ opt.splitright = true
 -- Window sizing (from your vimrc)
 opt.winwidth = 79
 opt.winminheight = 0
+
+-- Colorscheme - habamax (built-in, matches iTerm2 Dark)
+opt.background = "dark"
+vim.cmd.colorscheme("habamax")

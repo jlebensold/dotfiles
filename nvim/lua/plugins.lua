@@ -13,17 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- Colorscheme - Solarized Dark
-  {
-    "ishan9299/nvim-solarized-lua",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.o.background = "dark"
-      vim.cmd.colorscheme("solarized")
-    end,
-  },
-
   -- Telescope (replaces CtrlP) - fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -104,7 +93,7 @@ require("lazy").setup({
     event = "VeryLazy",
     config = function()
       require("lualine").setup({
-        options = { theme = "solarized_dark" },
+        options = { theme = "auto" },
       })
     end,
   },

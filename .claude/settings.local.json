@@ -11,7 +11,13 @@
       "Bash(XDG_CONFIG_HOME=/Users/jon/Projects/dotfiles nvim:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(git -C /Users/jon/Projects/dotfiles status)",
+      "Bash(git -C /Users/jon/Projects/dotfiles diff)",
+      "Bash(git -C /Users/jon/Projects/dotfiles log --oneline -5)",
+      "Bash(git -C /Users/jon/Projects/dotfiles add tmux.conf)",
+      "Bash(git -C /Users/jon/Projects/dotfiles commit -m \"$\\(cat <<''EOF''\nchange tmux base-index to 0\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C /Users/jon/Projects/dotfiles push)"
     ]
   }
 }

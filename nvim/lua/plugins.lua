@@ -36,6 +36,8 @@ require("lazy").setup({
 
       telescope.setup({
         defaults = {
+          -- Disable picker caching to prevent stale results
+          cache_picker = false,
           -- Use vim syntax highlighting instead of treesitter in previews
           file_previewer = previewers.vim_buffer_cat.new,
           grep_previewer = previewers.vim_buffer_vimgrep.new,

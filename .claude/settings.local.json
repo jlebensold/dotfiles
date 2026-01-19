@@ -17,7 +17,9 @@
       "Bash(git -C /Users/jon/Projects/dotfiles log --oneline -5)",
       "Bash(git -C /Users/jon/Projects/dotfiles add tmux.conf)",
       "Bash(git -C /Users/jon/Projects/dotfiles commit -m \"$\\(cat <<''EOF''\nchange tmux base-index to 0\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git -C /Users/jon/Projects/dotfiles push)"
+      "Bash(git -C /Users/jon/Projects/dotfiles push)",
+      "Bash(git -C /Users/jon/Projects/dotfiles add nvim/lua/plugins.lua)",
+      "Bash(git -C /Users/jon/Projects/dotfiles commit -m \"$\\(cat <<''EOF''\ndisable telescope picker caching to prevent stale results\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }

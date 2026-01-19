@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(./setup.sh)",
+      "Bash(nvim:*)",
+      "Bash(tmux -V:*)",
+      "Bash(tmux source-file:*)",
+      "Bash(cc:*)",
+      "Bash(NVIM_APPNAME=\"\" XDG_CONFIG_HOME=/Users/jon/Projects/dotfiles nvim:*)",
+      "Bash(XDG_CONFIG_HOME=/Users/jon/Projects/dotfiles nvim:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)"
+    ]
+  }
+}

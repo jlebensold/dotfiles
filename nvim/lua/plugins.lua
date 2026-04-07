@@ -53,6 +53,14 @@ require("lazy").setup({
             },
           },
         },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+          live_grep = {
+            additional_args = { "--hidden" },
+          },
+        },
       })
       telescope.load_extension("fzf")
     end,
@@ -156,5 +164,22 @@ require("lazy").setup({
     keys = {
       { "ga", "<Plug>(EasyAlign)", mode = { "n", "x" }, desc = "Easy align" },
     },
+  },
+
+  -- Zen mode for distraction-free writing
+  {
+    "folke/zen-mode.nvim",
+    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen mode" } },
+    opts = {
+      window = { width = 80, options = { number = false, relativenumber = false, signcolumn = "no" } },
+    },
+  },
+
+  -- Markdown preview in browser
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = "markdown",
+    build = "cd app && npx --yes yarn install",
+    keys = { { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown preview" } },
   },
 })

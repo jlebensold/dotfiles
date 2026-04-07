@@ -22,6 +22,9 @@ map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
+-- Copy selection to macOS clipboard
+map("v", "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+
 -- Stay in visual mode when indenting
 map("v", "<", "<gv", { desc = "Indent left" })
 map("v", ">", ">gv", { desc = "Indent right" })
@@ -29,3 +32,13 @@ map("v", ">", ">gv", { desc = "Indent right" })
 -- Move lines up/down in visual mode
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+
+-- In wrapped files, move by display line (not actual line)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    local opts = { buffer = true }
+    vim.keymap.set("n", "j", "gj", opts)
+    vim.keymap.set("n", "k", "gk", opts)
+  end,
+})

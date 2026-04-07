@@ -35,6 +35,9 @@ else
   opt.termguicolors = false
 end
 
+-- Use system clipboard
+opt.clipboard = "unnamedplus"
+
 -- Behavior
 opt.backspace = "indent,eol,start"
 opt.history = 1000
@@ -61,3 +64,18 @@ opt.winminheight = 0
 -- Colorscheme - habamax (built-in, matches iTerm2 Dark)
 opt.background = "dark"
 vim.cmd.colorscheme("habamax")
+
+-- Prose-friendly settings for markdown
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    local o = vim.opt_local
+    o.wrap = true           -- soft wrap long lines
+    o.linebreak = true      -- wrap at word boundaries, not mid-word
+    o.colorcolumn = ""      -- hide the column ruler
+    o.spell = true          -- highlight misspelled words (z= to fix)
+    o.spelllang = "en_us"
+    o.conceallevel = 2      -- hide markup syntax (bold markers, etc.)
+    o.shiftwidth = 2
+  end,
+})

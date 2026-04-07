@@ -18,7 +18,7 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Plug 'vim-syntastic/syntastic'
 
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'micha/vim-colors-solarized'
+" #Plug 'micha/vim-colors-solarized'
 " Plug 'tpope/vim-sensible'
 " Plug 'leafgarland/typescript-vim'
 " Plug 'peitalin/vim-jsx-typescript'
@@ -109,7 +109,7 @@ set winwidth=79
 " Colors
 """""
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 """"
 
 
